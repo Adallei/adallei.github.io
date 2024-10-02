@@ -1,0 +1,248 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ljg&#39;s Homestead – </title>
+    <link>https://adallei.github.io/zh-cn/</link>
+    <description>Recent content on Ljg&#39;s Homestead</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 17 Sep 2024 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://adallei.github.io/zh-cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+      
+    
+    
+    <item>
+      <title>使用 termux搭建hugo并部署到github</title>
+      <link>https://adallei.github.io/zh-cn/blog/technology/building-hugo-with-termux-and-deploying-to-github/</link>
+      <pubDate>Tue, 17 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://adallei.github.io/zh-cn/blog/technology/building-hugo-with-termux-and-deploying-to-github/</guid>
+      <description>
+        
+        
+        &lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      这篇文章是使用termux搭建hugo并部署到github的一些基础教程,进阶教程会在后续写出。
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;前言&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;前言&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%89%8d%e8%a8%80&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hugo是由go语言编写的静态网站生成引擎，以其速度著称，号称是“The world’s fastest framework for building websites”。&lt;br&gt;
+Termux是在Android系统上的一款终端模拟器。功能非常强大，可以运行一些linux应用。所以可以用termux当作终端来搭建hugo。&lt;br&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ℹ️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      此文章将分成搭建和部署两部分介绍。
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2&gt;搭建&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;搭建&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%90%ad%e5%bb%ba&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h4&gt;准备工作&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;准备工作&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;在正式开始之前需要先下载termux并安装相关软件包才能开始正式搭建。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;下载termux&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;下载termux&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e4%b8%8b%e8%bd%bdtermux&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;在&lt;a href=&#34;https://github.com/termux/termux-app/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt;或者&lt;a href=&#34;https://f-droid.org/packages/com.termux/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;F-droid&lt;/a&gt;上下载并安装打开termux&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;获取存储权限&lt;br&gt;
+&lt;code&gt;termux-setup-storage&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;更新包&lt;br&gt;
+&lt;code&gt;pkg upgrade -y&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安装相关工具(git和vim)&lt;br&gt;
+&lt;code&gt;pkg install git vim -y&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;安装&amp;amp;使用&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;安装使用&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ae%89%e8%a3%85%e4%bd%bf%e7%94%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;安装hugo&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;安装hugo&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ae%89%e8%a3%85hugo&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;安装&lt;br&gt;
+&lt;code&gt;pkg install hugo -y&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;h5&gt;创建网页&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;创建网页&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%88%9b%e5%bb%ba%e7%bd%91%e9%a1%b5&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;建立新的站点&lt;br&gt;
+&lt;code&gt;hugo new site (你的站点名)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;下载&amp;amp;安装主题&lt;br&gt;
+&lt;code&gt;cd (你的站点名)&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;cd themes&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;git clone (主题下载地址)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hugo默认是没有主题的，所以你需要先安装一个主题才能使用hugo。&lt;br&gt;
+在网上找到一个hugo主题然后把(主题下载地址)替换成你找到的主题。&lt;br&gt;
+或者直接下载主题的源码解压到themes目录。&lt;br&gt;
+主题的安装方式可能会略有不同，你需要找到主题官方发布的安装教程按照教程安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;启动服务&lt;br&gt;
+&lt;code&gt;hugo server&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意要在站点的根目录执行，也就是(你的站点名)这个目录。&lt;br&gt;
+启动成功后可以在浏览器输入localhost:1313浏览站点&lt;br&gt;
+输入这个指令默认的配置文件是toml格式的，如果你习惯使用yaml格式就输入&lt;br&gt;
+&lt;code&gt;hugo convert toYAML [flags] [args]&lt;/code&gt;&lt;br&gt;
+将内容目录中的所有前置内容转换为使用yaml格式的前置内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;写文章&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;写文章&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%86%99%e6%96%87%e7%ab%a0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;新建文章&lt;br&gt;
+&lt;code&gt;hugo new content/(文章目录)…/文章名.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;文章的front matter结构是:&lt;br&gt;
+title: 文章的标题&lt;br&gt;
+date: 文章的发布日期（通常为 YYYY-MM-DD 格式）&lt;br&gt;
+author: 作者的名字&lt;br&gt;
+draft: 是否为草稿（true 或 false）&lt;br&gt;
+tags: 标签列表，用于组织文章&lt;br&gt;
+categories: 分类列表，用于归类文章&lt;br&gt;
+slug: URL 中的自定义短路径&lt;br&gt;
+summary: 文章的摘要，通常用于列表页面&lt;br&gt;
+keywords: 页面关键词，用于 SEO&lt;br&gt;
+description: 页面描述，用于 SEO。&lt;br&gt;
+aliases: 旧网址的重定向列表&lt;br&gt;
+type: 内容类型，决定该内容使用的模板&lt;br&gt;
+layout: 指定使用的模板布局&lt;br&gt;
+文章采用Markdown标记语言，使用方法可以去&lt;a href=&#34;https://markdown.com.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Markdown官方教程&lt;/a&gt;查看。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;小结&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;小结&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%b0%8f%e7%bb%93&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上就是网页的基础搭建，如果想要定制你的hugo 或遇到了什么错误请参阅&lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;hugo官方文档&lt;/strong&gt;&lt;/a&gt;或&lt;a href=&#34;https://hugo.opendocs.io/getting-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;hugo中文文档&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;h2&gt;部署&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;部署&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%83%a8%e7%bd%b2&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h4&gt;github上的准备&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;github上的准备&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#github%e4%b8%8a%e7%9a%84%e5%87%86%e5%a4%87&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;账户&amp;amp;仓库&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;账户仓库&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%b4%a6%e6%88%b7%e4%bb%93%e5%ba%93&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;注册&lt;a href=&#34;github.com&#34; &gt;&lt;strong&gt;github&lt;/strong&gt;&lt;/a&gt;账户&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;建立远程仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在github创建new repository，注意仓库名一定要是你的 github用户名.github.io&lt;br&gt;
+其他的可填可不填。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;设置仓库&lt;br&gt;
+进入仓库设置/Pages&lt;br&gt;
+把Build and depolyment下面的source选项改成Deploy from a branch。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;git的使用&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;git的使用&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#git%e7%9a%84%e4%bd%bf%e7%94%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;配置&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;配置&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%85%8d%e7%bd%ae&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;进入站点中的public目录&lt;br&gt;
+&lt;code&gt;cd /…/(你的站点路径)/public&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果public下没有文件就需要在(你的站点路径)下输入&lt;br&gt;
+&lt;code&gt;hugo -D&lt;/code&gt;
+&lt;br&gt;生成静态文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;配置用户信息&lt;br&gt;
+&lt;code&gt;git config --global user.name &amp;quot;(你的用户名)&amp;quot;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;git config --global user.email &amp;quot;(你的电子邮件)&amp;quot;&lt;/code&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意:(你的用户名)和(你的电子邮箱)不一定要和GitHub上的相同。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;初始该目录为git仓库&lt;br&gt;
+&lt;code&gt;git init&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果输入一次没有成功就输入两次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;添加远程仓库&lt;br&gt;
+&lt;code&gt;git remote add (别名，一般为origin) &amp;quot;(仓库的SSH链接)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用git remote add添加SSH链接首先要先知道github仓库的SSH链接。&lt;br&gt;
+在仓库首页点击code再点击SSH就能看到仓库的SSH链接了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;查看仓库信息&lt;br&gt;
+&lt;code&gt;git remote -vv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;SSH密钥生成密钥对&lt;br&gt;
+&lt;code&gt;ssh-keygen -t rsa -C “(备注)”&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其中(备注)可不写。&lt;br&gt;
+获取生成的公钥一般在Termux的home目录下的.ssh文件,可以在安桌原生文件中打开，也可授权给别的应用打开。&lt;br&gt;
+找到.ssh目录下的id.rea.pub文件以文本形式打开复制里面所有内容,将复制的内容粘贴到GitHub。&lt;br&gt;
+在GitHub网站点击自己的头像，再点击Settings，找到SSH and GPG Keys
+点击New SSH Kays把刚刚复制的内容粘贴到key的下面随便取一个Title点击Add SSH Key添加密钥，如果需要输入密码就输入GitHub的密码。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;提交public下所有文件到数据暂存区&lt;br&gt;
+&lt;code&gt;git add &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;提交文件更改&lt;br&gt;
+&lt;code&gt;git commit -m &amp;quot;(推送信息)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;推送&lt;br&gt;
+&lt;code&gt;git push -u origin main&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;origin是上面提到的别名。&lt;br&gt;
+main代表主分支，如果推送到main分支失败&lt;br&gt;
+可以使用命令:&lt;br&gt;
+&lt;code&gt;git pull -f origin main&lt;/code&gt;&lt;br&gt;
+强制推送，使用此代码会强制用本地代码覆盖远程仓库代码。&lt;br&gt;
+如果以上办法不行，就输入:&lt;br&gt;
+&lt;code&gt;git push -u origin master&lt;/code&gt;&lt;br&gt;
+master是默认分支名。&lt;br&gt;
+推送之后需要到GitHub仓库中的设置中的Pages把Branch改成master。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;小结&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;小结-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%b0%8f%e7%bb%93-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上就是hugo在GitHub上的部署。&lt;br&gt;
+还有另一种利用GitHubActions部署的方法请查阅&lt;a href=&#34;https://gohugo.io/hosting-and-deployment/hosting-on-github/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Hugo官网&lt;/strong&gt;&lt;/a&gt;。&lt;br&gt;
+最后，感谢你的观看，希望这些对你有帮助！&lt;/p&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

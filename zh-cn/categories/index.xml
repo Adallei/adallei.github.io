@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ljg&#39;s Homestead – Categories</title>
+    <link>https://adallei.github.io/zh-cn/categories/</link>
+    <description>Recent content in Categories on Ljg&#39;s Homestead</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	  <atom:link href="https://adallei.github.io/zh-cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>
