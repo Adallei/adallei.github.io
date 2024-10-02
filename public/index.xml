@@ -1,0 +1,248 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ljg&#39;s Homestead – </title>
+    <link>https://adallei.github.io/</link>
+    <description>Recent content on Ljg&#39;s Homestead</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 17 Sep 2024 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://adallei.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+      
+    
+    
+    <item>
+      <title>Building hugo with termux and deploying to Github</title>
+      <link>https://adallei.github.io/blog/technology/building-hugo-with-termux-and-deploying-to-github/</link>
+      <pubDate>Tue, 17 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://adallei.github.io/blog/technology/building-hugo-with-termux-and-deploying-to-github/</guid>
+      <description>
+        
+        
+        &lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      This article is to use termux build hugo and deploy to github some basic tutorials, advanced tutorials will be written in the follow-up.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;Foreword&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;foreword&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#foreword&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hugo is a static website generation engine written in the go language, known for its speed and claimed to be &amp;ldquo;The world&amp;rsquo;s fastest framework for building websites&amp;rdquo;&lt;br&gt;
+Termux is a terminal emulator on Android. It is very powerful and can run some linux applications. So you can use termux as a terminal to build hugo.&lt;br&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ℹ️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      This post will be divided into two parts: Build and Deployment.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2&gt;Build&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;build&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#build&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h4&gt;Preparations Work&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;preparations-work&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#preparations-work&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;Before you start, you need to download termux and install the relevant packages before you can start the build.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Download termux&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;download-termux&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#download-termux&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;Download and install open termux on &lt;a href=&#34;https://github.com/termux/termux-app/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt; or &lt;a href=&#34;https://f-droid.org/packages/com.termux/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;F-droid&lt;/a&gt;.&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Getting storage access&lt;br&gt;
+&lt;code&gt;termux-setup-storage&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;update package&lt;br&gt;
+&lt;code&gt;pkg upgrade -y&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Installation of related tools (git and vim)&lt;br&gt;
+&lt;code&gt;pkg install git vim -y&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Installation &amp;amp; Use&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;installation--use&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#installation--use&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Install hugo&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;install-hugo&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#install-hugo&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;Install&lt;br&gt;
+&lt;code&gt;pkg install hugo -y&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;h5&gt;Create a web page&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;create-a-web-page&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#create-a-web-page&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;Create a new site&lt;br&gt;
+&lt;code&gt;hugo new site (Your site name)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Download &amp;amp; Install Theme&lt;br&gt;
+&lt;code&gt;cd (Your site name)&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;cd themes&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;git clone (Theme Download Address)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hugo doesn&amp;rsquo;t have a theme by default, so you need to install a theme before you can use hugo.&lt;br&gt;
+Find a hugo theme online then replace (Theme Download address) with the theme you found.&lt;br&gt;
+Or just download the theme&amp;rsquo;s source code and extract it to the themes directory.&lt;br&gt;
+Themes may be installed in slightly different ways, you need to find the official installation tutorial released by the theme and follow it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Starting services&lt;br&gt;
+&lt;code&gt;hugo server&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Be careful to execute it in the root directory of the site, which is the (Your site name) directory.&lt;br&gt;
+After successful startup, you can browse the site by typing localhost:1313 into your browser.&lt;br&gt;
+The default configuration file when you enter this command is in toml format, if you are used to yaml format then enter&lt;br&gt;
+&lt;code&gt;hugo convert toYAML [flags] [args]&lt;/code&gt;&lt;br&gt;
+Convert all front content in the content directory to front content using the yaml format&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Write an article&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;write-an-article&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#write-an-article&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;New article&lt;br&gt;
+&lt;code&gt;hugo new content/(Article directory)…/Article name.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The front matter structure of the article is:&lt;br&gt;
+title: Title of the article&lt;br&gt;
+date: The date the article was published (usually in YYYY-MM-DD format)&lt;br&gt;
+author: Author&amp;rsquo;s name&lt;br&gt;
+draft: Whether it is a draft (true or false)&lt;br&gt;
+tags: List of tags for organizing articles&lt;br&gt;
+categories: Category list for categorizing articles&lt;br&gt;
+slug: Custom short paths in URLs&lt;br&gt;
+summary: A summary of the article, usually used on listing pages&lt;br&gt;
+keywords: Page keywords for SEO&lt;br&gt;
+description: Page descriptions for SEO&lt;br&gt;
+aliases: Redirect list for old URLs&lt;br&gt;
+type: The content type, which determines the template used for that content.&lt;br&gt;
+layout: Specify the template layout to be used&lt;br&gt;
+The article adopts Markdown markup language, you can go to &lt;a href=&#34;https://www.markdownguide.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Markdown Guide&lt;/a&gt; to see how to use it!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Summary&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;summary&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#summary&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Above is the basic construction of the page, if you want to customize your hugo or encountered any errors please refer to the&lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Official Hugo Documentation&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Deployment&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deployment&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deployment&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h4&gt;Preparations on github&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;preparations-on-github&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#preparations-on-github&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Account&amp;amp;Repository&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;accountrepository&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#accountrepository&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;Register for a &lt;a href=&#34;github.com&#34; &gt;&lt;strong&gt;github&lt;/strong&gt;&lt;/a&gt; account&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Establishment of remote repository&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Create a new repository in github, and make sure the name of the repository is your github username.github.io.&lt;br&gt;
+Others can be filled in or not.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Setting up therepository&lt;br&gt;
+Access to repository settings/Pages&lt;br&gt;
+Change the source option under build and dissolve to deploy from branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;The use of git&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-use-of-git&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-use-of-git&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Configuration&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;configuration&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#configuration&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;li&gt;Go to the public directory in the site&lt;br&gt;
+&lt;code&gt;cd /…/(Your site&#39;s path)/public&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you don&amp;rsquo;t have a file under public you need to type in (your site path).&lt;br&gt;
+&lt;code&gt;hugo -D&lt;/code&gt;
+&lt;br&gt;to generate static files&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Configure user information&lt;br&gt;
+&lt;code&gt;git config --global user.name &amp;quot;(Your username)&amp;quot;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;git config --global user.email &amp;quot;(Your email address)&amp;quot;&lt;/code&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: (Your username) and (Your email address) need to be different from the ones on GitHub.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Initialize the directory as a git repository&lt;br&gt;
+&lt;code&gt;git init&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you enter it once and it doesn&amp;rsquo;t work, enter it twice.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Adding a remote repository&lt;br&gt;
+&lt;code&gt;git remote add (The alias, usually origin) &amp;quot;(SSH link to the repository)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To add an SSH link using git remote add, you first need to know the SSH link to the github repository first.&lt;br&gt;
+Click code on the repository home page and then click SSH to see the SSH link to the repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;View repository Information&lt;br&gt;
+&lt;code&gt;git remote -vv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;SSH key generation key pairs&lt;br&gt;
+&lt;code&gt;ssh-keygen -t rsa -C “(Comment)”&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;where (Comment) may be omitted.&lt;br&gt;
+Getting the generated public key is usually in the .ssh file in Termux&amp;rsquo;s home directory, which can be opened in the native files of the desktop, or authorized to be opened by other applications.&lt;br&gt;
+Find the id.rea.pub file in the .ssh directory, open it as text and copy everything in it, then paste the copied content into GitHub.&lt;br&gt;
+Click on your avatar on the GitHub website, then click on Settings and find SSH and GPG Keys.
+Click New SSH Kays and paste what you just copied under the key and click Add SSH Key to add the key, and if you need to enter a password, enter your GitHub password.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Commit all files under public to the data staging area&lt;br&gt;
+&lt;code&gt;git add &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Submission of document changes&lt;br&gt;
+&lt;code&gt;git commit -m &amp;quot;(Push message)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push&lt;br&gt;
+&lt;code&gt;git push -u origin main&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;origin is the alias mentioned above.&lt;br&gt;
+main stands for the master branch, if push to the main branch fails&lt;br&gt;
+you can use the command:&lt;br&gt;
+&lt;code&gt;git pull -f origin main&lt;/code&gt;&lt;br&gt;
+to force a push, using this command will force overwriting the remote repository code with local code.&lt;br&gt;
+If the above doesn&amp;rsquo;t work, type:&lt;br&gt;
+&lt;code&gt;git push -u origin master&lt;/code&gt;&lt;br&gt;
+master is the default branch name.&lt;br&gt;
+After pushing you need to go to Pages in the settings in your GitHub repository and change Branch to master.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5&gt;Summary&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;summary-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#summary-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Above is the deployment of hugo on GitHub.&lt;br&gt;
+There&amp;rsquo;s another way to deploy using GitHubActions check out &lt;a href=&#34;https://gohugo.io/hosting-and-deployment/hosting-on-github/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Hugo Official Website&lt;/strong&gt;&lt;/a&gt;&lt;br&gt;
+Finally, thank you for watching and I hope this has been helpful!&lt;/p&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>
