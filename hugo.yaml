@@ -1,0 +1,118 @@
+# Hugo configuration file
+baseURL: "https://adallei.github.io/"
+title: MultiCubc
+
+enableRobotsTXT: true
+hasCJKLanguage: true
+
+# import hextra as module
+module:
+  hugoVersion:
+    extended: true
+    min: "0.146.0"
+
+  imports:
+    - path: github.com/imfing/hextra
+  
+outputs:
+  home: [HTML]
+  page: [HTML]
+  section: [HTML, RSS]
+
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+
+# languages
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+    title: MultiCubc
+  zh-cn:
+    languageName: 简体中文
+    languageCode: zh-CN
+    weight: 2
+    title: MultiCubc
+
+menu:
+  main:
+    - identifier: about
+    - name: About
+      pageRef: /about/
+      weight: 1
+    - identifier: articles
+    - name: Articles
+      pageRef: /articles/
+      weight: 2
+    - identifier: docs
+    - name: Docs
+      pageRef: /docs/
+      weight: 3
+    - name: Search
+      weight: 4
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/adallei/"
+      params:
+        icon: github
+    - name: Website
+      weight: 6
+      url: "https://cubc.top/"
+      params:
+        icon: globe-alt
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+     path: images/logo.svg
+     dark: images/logo-dark.svg
+     link: /
+     width: 35
+     height: 35
+
+  footer:
+    enable: false
+    displayCopyright: true
+    displayPoweredBy: false
+    width: normal
+
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+    
+    # Search
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      index: content
+      tokenize: forward
+      
+  articles:
+    list:
+      displayTags: true
+      # date | lastmod | publishDate | title | weight
+      sortBy: date
+      sortOrder: desc # or "asc"
+      
+  editURL:
+    enable: true
+    base: "https://github.com/adallei/adallei.github.io/edit/main/content"
